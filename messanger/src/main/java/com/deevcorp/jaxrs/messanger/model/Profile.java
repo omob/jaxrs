@@ -1,11 +1,17 @@
 package com.deevcorp.jaxrs.messanger.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Profile {
 	private long id;
 	private String profileName;
 	private String firstName;
 	private String lastName;
 	
+	public Profile() {
+		
+	}
 	public Profile(long id, String profileName, String firstName, String lastName) {
 		this.id = id;
 		this.profileName = profileName;
