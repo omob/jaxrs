@@ -4,6 +4,7 @@ package com.deevcorp.jaxrs.messanger.resources;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -51,5 +52,12 @@ public class MessageResource {
     public Message updateMessage(@PathParam("messageId") long messageId,  Message message) {
     	message.setId(messageId);
     	return this.messageService.updateMessage(message);
+    }
+    
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{messageId}")
+    public Message deleteMessage(@PathParam("messageId") long messageId) {
+    	return this.messageService.removeMessage(messageId);
     }
 }
