@@ -1,6 +1,7 @@
 package com.deevcorp.jaxrs.messanger.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -44,5 +45,27 @@ public class MessageService {
 	
 	public Message removeMessage(long id) {
 		return messages.remove(id);
+	}
+	
+	public List<Message> getMessagesByYear(int year) {
+		List<Message> messagesForYear = new ArrayList<>();
+		Calendar calender = Calendar.getInstance();
+		
+		for (Message message : messages.values()) {
+			calender.setTime(message.getCreated());
+			if (calender.get(Calendar.YEAR) == year) {
+				messagesForYear.add(message);
+			}
+		}
+		
+		return messagesForYear;
+	}
+	
+	public List<Message> getAllMessagesPaginated(int start, int size) {
+		List<Message> messagesCopy = new ArrayList<>(messages.values());
+		if (start + size > messagesCopy.size())
+			return new ArrayList<Message>();
+		
+		return messagesCopy.subList(start, start + size); 
 	}
 }
